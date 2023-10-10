@@ -16,17 +16,26 @@ public class PlayerCharacter : Character
 	}
 
 	/// <summary>
-	/// �ړ������̖��
+	/// 移動可能になるスティックの入力値
 	/// </summary>
-	public Transform m_Arrow;
+	[SerializeField] protected float m_Threshold_Run = 0.3f;
+	/// <summary>
+	/// 現在の移動方向を示す矢印
+	/// </summary>
+	[SerializeField] protected Transform m_Arrow;
 
 	protected int ANIM_PARAM_HASH_RUN = Animator.StringToHash("Run");
+
+	/// <summary>
+	/// 移動入力値
+	/// </summary>
+	protected Vector2 m_Stick;
 	
 	public override void SelfAwake()
 	{
 		base.SelfAwake();
 
-		//�A�N�V�����֌W
+		//アクション関係初期化
 		m_ActionController = new ActionController();
 		m_ActionController.SelfAwake();
 		m_ActionController.AddState(EState.Idle, new ActionStateBase());
@@ -37,13 +46,18 @@ public class PlayerCharacter : Character
 		var state_Run = m_ActionController.GetState(EState.Run);
 		state_Run.onUpdate += State_Run;
 
-		m_ActionController.ChangeState(EState.Run);
+		m_ActionController.ChangeState(EState.Idle);
 
 	}
 	public override void SelfUpdate()
 	{
+		//スティックの入力値を更新
+		m_Stick = InputManager.instance.GetMove();
+
+		//アクションを更新
 		m_ActionController.SelfUpdate();
 
+		//アニメーターのパラメータを更新する
 		m_Animator.SetBool(ANIM_PARAM_HASH_RUN, (EState)m_ActionController.currentStateName == EState.Run);
 	}
 	public override void SeldDestory()
@@ -56,9 +70,7 @@ public class PlayerCharacter : Character
 	/// </summary>
 	protected void State_Idle()
 	{
-		var stick = InputManager.instance.GetMove();
-		//�X�e�B�b�N�������ȏ�|���ꂽ��ړ�
-		if (stick.sqrMagnitude >= Mathf.Pow(0.5f, 2)) {
+		if ( CanMove() ) {
 			m_ActionController.ChangeState(EState.Run);
 		}
 	}
@@ -66,22 +78,20 @@ public class PlayerCharacter : Character
 	/// �ړ����
 	/// </summary>
 	protected void State_Run()
-	{
-		//�X�e�B�b�N�̓��͒l����
-		var stick = InputManager.instance.GetMove();
-
-		//�X�e�B�b�N�����������ɂȂ�����ҋ@
-		if (stick.sqrMagnitude < Mathf.Pow(0.5f, 2)) {
+	{	
+		if ( CanMove() == false ) {
+			m_Rb.velocity = Vector2.zero; //慣性を抜く
 			m_ActionController.ChangeState(EState.Idle);
-			m_Rb.velocity = Vector2.zero; //������؂�
 		} else {
-			m_Rb.velocity = stick.normalized * (m_MoveSpeed);
-			currentDirection = stick;						
-			m_SpriteRenderer.flipX = (stick.x > 0);
+			m_Rb.velocity = m_Stick.normalized * (m_MoveSpeed);
+			currentDirection = m_Stick.normalized;
+			m_SpriteRenderer.flipX = (m_Stick.x > 0);
 			
 			//移動方向に矢印を向ける
 			m_Arrow.transform.localEulerAngles = new Vector3(0, 0, MathEX.RoundAngleRepeat(currentDirection.x, -currentDirection.y));
 		}
 	}
+
+	protected bool CanMove() { return (m_Stick.sqrMagnitude >= Mathf.Pow(m_Threshold_Run, 2)); }
 
 }

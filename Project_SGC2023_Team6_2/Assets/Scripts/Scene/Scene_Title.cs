@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 /// <summary>
@@ -48,6 +49,10 @@ public class Scene_Title : MonoBehaviour
 	/// タイトルUIのグループ
 	/// </summary>
 	[SerializeField] protected CanvasGroup m_CanvasGroup_Title;
+	/// <summary>
+	/// ゲーム起動UI
+	/// </summary>
+	[SerializeField] protected Image m_PushCommamdUI;
 
 	// Start is called before the first frame update
 	void Awake()
@@ -65,13 +70,14 @@ public class Scene_Title : MonoBehaviour
 
 				SetAlpha(m_CanvasGroup_TitleMovie, 0); 
 				SetAlpha(m_CanvasGroup_Title, 0);
+				SetVisible(m_PushCommamdUI, false);
 
 				m_Timer.Start(1);
 				NextState();
 			} break;
 			// ▼ タイトルムービーの準備
 			case STEP_READY_MOVIE: {
-				if (m_Timer.Update() == false) { break;  }
+				if (m_Timer.Update() == false) { break; }
 
 				SetAlpha(m_CanvasGroup_TitleMovie, 1);
 				m_VideoPlayer.Play();
@@ -79,13 +85,13 @@ public class Scene_Title : MonoBehaviour
 			} break;
 			// ▼ タイトルムービーを再生する
 			case STEP_PLAY_MOVIE: {
-				float rate = ((float)m_VideoPlayer.time / (float)m_VideoPlayer.clip.length);
-				if (rate >= 0.8f) {
+				var rate = (m_VideoPlayer.time / m_VideoPlayer.clip.length);
+				if (rate >= 0.8f) { //再生完了したら次へ
 					m_Timer.Start(0.5f);
 					NextState();
 				}
 			} break;
-			// ▼ タイトルムービーの再生を待つ
+			// ▼ タイトルムービーの退室
 			case STEP_EXIT_MOVIE: {
 				bool end = m_Timer.Update();
 				float rate = m_Timer.progress;
@@ -103,6 +109,7 @@ public class Scene_Title : MonoBehaviour
 				if (end) {
 					m_AudioPkayBack_BGM = AudioManager.instance.PlayBGM(EBGM.Title2);
 					SetAlpha(m_CanvasGroup_Title, 1);
+					SetVisible(m_PushCommamdUI, true);
 					NextState();
 				}
 			} break;
@@ -113,19 +120,20 @@ public class Scene_Title : MonoBehaviour
 					AudioManager.instance.StopBGM(m_AudioPkayBack_BGM); //BGMを停止
 					AudioManager.instance.PlaySE(ESe.OpenLetter);		//SEを再生
 					m_Letteranim.SetBool("LetterBool", true);			//手紙を開く
-					m_Timer.Start(1);									//シーンの遷移まで少し待つ
+					m_Timer.Start(1.5f);								//シーンの遷移まで少し待つ
 					NextState();
 				}
 			} break;
 			//次のシーンへ
 			case STEP_NEXT_SCENE: {
-				if (m_Timer.Update() == false) {  break;}
+				if (m_Timer.Update() == false) { break; }
 
 				GameSceneManager.instance.NextScene(EScene.GameMain);
 				EndState();
 			} break;
 		}
 	}
+
 	/// <summary>
 	/// 次のステートへ
 	/// </summary>
@@ -138,5 +146,7 @@ public class Scene_Title : MonoBehaviour
 	/// 指定キャンバスの透明度を設定する
 	/// </summary>
 	protected void SetAlpha(CanvasGroup _cg, float _alpha) { _cg.alpha = _alpha; }
+
+	protected void SetVisible(Graphic _graphic, bool _visible) { _graphic.gameObject.SetActive(_visible); }
 
 }

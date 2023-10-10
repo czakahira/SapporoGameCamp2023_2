@@ -1067,6 +1067,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_CanvasGroup_Title: {fileID: 1323656049}
+  m_PushCommamdUI: {fileID: 1340143394}
 --- !u!1 &1562138914
 GameObject:
   m_ObjectHideFlags: 0

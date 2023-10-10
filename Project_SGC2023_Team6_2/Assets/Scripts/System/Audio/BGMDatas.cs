@@ -13,6 +13,7 @@ public struct BGMData
 	public EBGM label;
 	public AudioClip clip;
 	public float volume;
+	public bool loop;
 }
 
 [CreateAssetMenu(fileName = "BGMDatas", menuName = "ScriptableObjects/BGMDatas", order = 1)]

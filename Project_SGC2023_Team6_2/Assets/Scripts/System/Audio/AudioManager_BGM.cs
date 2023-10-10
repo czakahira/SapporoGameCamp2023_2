@@ -115,6 +115,7 @@ public class AudioPlayer_BGM : AudioPlayer_Base
 		data = AudioManager.instance.GetBgmData(_bgm);
 		m_Source.clip = data.clip;
 		volume = data.volume;
+		m_Source.loop = data.loop;
 		Play();
 
 		isPlaying = true;

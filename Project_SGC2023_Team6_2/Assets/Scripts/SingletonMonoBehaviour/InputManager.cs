@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 
 /// <summary>
-/// ���͒l��Q�Ƃ���}�l�[�W���[
+/// 入力判定マネージャー
 /// </summary>
 public class InputManager : SingletonBehaviour<InputManager>
 {
 	/// <summary>
-	/// �ړ����͒l��擾
+	/// 移動スティック
 	/// </summary>
 	public Vector2 GetMove()
 	{
@@ -18,15 +18,22 @@ public class InputManager : SingletonBehaviour<InputManager>
 	}
 
 	/// <summary>
-	/// ���B�R�}���h
+	/// 増殖コマンド
 	/// </summary>
 	public bool IsMultiply()
 	{
-		//�L�[�{�[�h�̓��͒l
 		bool keyboard = (Keyboard.current.leftCtrlKey.isPressed && Keyboard.current.cKey.wasPressedThisFrame);
 		bool pad = false;
 
 
 		return keyboard || pad;
 	}
+	/// <summary>
+	/// タイトルで使用するゲーム開始コマンド
+	/// </summary>
+	public bool IsGameStart()
+	{
+		return Keyboard.current.spaceKey.wasPressedThisFrame;
+	}
+
 }

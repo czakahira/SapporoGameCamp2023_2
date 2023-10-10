@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SEDatas
   m_EditorClassIdentifier: 
   dats:
-  - label: 0
+  - label: 1
     clip: {fileID: 8300000, guid: fc3e1b75c8e9436428eb8536c951d287, type: 3}
-    volume: 1
-  - label: 1
+    volume: 0.1
+  - label: 2
     clip: {fileID: 8300000, guid: fbcaef2a1219ab94380a0f4ec1b67355, type: 3}
-    volume: 0.05
-  - label: 1
+    volume: 0.1
+  - label: 0
     clip: {fileID: 8300000, guid: ec6b41281a58e7946aa7c80c4e22dd47, type: 3}
     volume: 0.1

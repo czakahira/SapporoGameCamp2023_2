@@ -14,8 +14,8 @@ using UnityEngine;
 [System.Serializable]
 public class MapData
 {
-    //生成情報配列
-    public TreasureData[] m_treasures;       //宝箱の情報
+	//生成情報配列
+	public TreasureData[] m_treasures;       //宝箱の情報
 }
 
 //======================================================
@@ -24,15 +24,15 @@ public class MapData
 [System.Serializable]
 public class TreasureData
 {
-    //プレハブの名前保存用
-    [HideInInspector] public string m_name;
+	//プレハブの名前保存用
+	[HideInInspector] public string m_name;
 
-    //生成するプレハブ
-    public GameObject m_prefab;
+	//生成するプレハブ
+	public GameObject m_prefab;
 
-    //出現フレーム数
-    public int m_frame;
+	//出現フレーム数
+	public int m_frame;
 
-    //出現位置
-    public Vector3 m_position;
+	//出現位置
+	public Vector3 m_position;
 }

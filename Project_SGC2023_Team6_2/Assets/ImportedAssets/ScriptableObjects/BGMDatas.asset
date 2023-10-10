@@ -16,6 +16,8 @@ MonoBehaviour:
   - label: 0
     clip: {fileID: 8300000, guid: 53a1b12b51210b94aa9ce46b68e05181, type: 3}
     volume: 0.05
+    loop: 1
   - label: 1
     clip: {fileID: 8300000, guid: 8d44f99f03b6ff94dbb8a226f2a6e717, type: 3}
     volume: 0.05
+    loop: 1

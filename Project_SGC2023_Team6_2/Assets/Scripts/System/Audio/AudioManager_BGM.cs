@@ -73,7 +73,7 @@ public partial class AudioManager
 	/// <summary>
 	/// BGMを再生する
 	/// </summary>
-	public AudioPlayer_BGM PlayBGM(EBGM _bgm)
+	public AudioPlayer_BGM PlayBGM_GetPlayback(EBGM _bgm)
 	{
 		AudioPlayer_BGM player = null;
 		foreach (var ply in m_BgmPlayers) {
@@ -89,6 +89,10 @@ public partial class AudioManager
 		player.Play(_bgm);
 
 		return player;
+	}
+	public static AudioPlayer_BGM PlayBGM(EBGM _bgm)
+	{
+		return instance.PlayBGM_GetPlayback(_bgm);
 	}
 	/// <summary>
 	/// 指定プレイヤーのBGMを止める

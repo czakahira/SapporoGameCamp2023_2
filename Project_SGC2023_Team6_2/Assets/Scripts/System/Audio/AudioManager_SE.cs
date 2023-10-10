@@ -31,6 +31,7 @@ public partial class AudioManager
 	{
 		if (m_SePlayerCount > 0) {
 			foreach (var ply in m_SePlayers) {
+				if (ply.isPlaying) { ply.Stop(); }
 				ply.SelfDestroy();
 			}
 		}
@@ -86,7 +87,7 @@ public partial class AudioManager
 			player = AddSePlayer();
 		}
 
-		player.Play(_se);
+		player.Play(GetSeData(_se));
 
 		return true;
 	}
@@ -100,9 +101,9 @@ public class AudioPlayer_SE : AudioPlayer_Base
 
 	public SEData data { get; protected set; }
 
-	public void Play(ESe _se)
+	public void Play(SEData _data)
 	{
-		data = AudioManager.instance.GetSeData(_se);
+		data = _data;
 		m_Source.clip = data.clip;
 		volume = data.volume;
 		Play();

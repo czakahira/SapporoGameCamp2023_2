@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// アクションステートのコントローラー
+/// 汎用ステートのコントローラー
 /// </summary>
-public class ActionController
+public class StateController<T>  where T : Enum
 {
 	// -----------------------
 	// Member
@@ -14,23 +14,23 @@ public class ActionController
 	/// <summary>
 	/// 登録済みのステート
 	/// </summary>
-	protected Dictionary<Enum, ActionStateBase> m_States;
+	protected Dictionary<T, State_Base> m_States;
 	/// <summary>
 	/// 登録済みステート数
 	/// </summary>
 	protected int m_StateCount;
 
-	public Enum previousStateName { get; protected set; }
-	public Enum currentStateName { get; protected set; }
+	public T previousStateName { get; protected set; }
+	public T currentStateName { get; protected set; }
 
 	/// <summary>
 	/// 前回実行していたにステート
 	/// </summary>
-	protected ActionStateBase m_PreviousState;
+	protected State_Base m_PreviousState;
 	/// <summary>
 	/// 現在実行中にステート
 	/// </summary>
-	protected ActionStateBase m_CurrentState;
+	protected State_Base m_CurrentState;
 
 	// -----------------------
 	// Method
@@ -40,7 +40,7 @@ public class ActionController
 	/// </summary>
 	public virtual void SelfAwake()
 	{
-		m_States = new Dictionary<Enum, ActionStateBase>();
+		m_States = new Dictionary<T, State_Base>();
 		m_StateCount = 0;
 
 		m_PreviousState = null;
@@ -70,11 +70,11 @@ public class ActionController
 	/// <summary>
 	/// 指定スートを所持しているか
 	/// </summary>
-	public bool HasState(Enum _name) { return m_States.ContainsKey(_name); }
+	public bool HasState(T _name) { return m_States.ContainsKey(_name); }
 	/// <summary>
 	/// 指定ステートを取得する
 	/// </summary>
-	public virtual ActionStateBase GetState(Enum _name)
+	public virtual State_Base GetState(T _name)
 	{
 		if (HasState(_name)) { return m_States[_name]; }
 		return null;
@@ -82,7 +82,7 @@ public class ActionController
 	/// <summary>
 	/// ステートを追加する
 	/// </summary>
-	public virtual void AddState(Enum _name, ActionStateBase _state)
+	public virtual void AddState(T _name, State_Base _state)
 	{
 		if (HasState(_name)) {
 			Debug.LogError($"{_name} は登録済みです。");
@@ -94,7 +94,7 @@ public class ActionController
 	/// <summary>
 	/// ステートを破棄する
 	/// </summary>
-	public virtual void RemoveState(Enum _name, ActionStateBase _state)
+	public virtual void RemoveState(T _name, State_Base _state)
 	{
 		if (HasState(_name) == false) {
 			Debug.LogError($"{_name} は未登録です。");
@@ -106,7 +106,7 @@ public class ActionController
 	/// <summary>
 	/// 指定ステートに切り替える
 	/// </summary>
-	public virtual void ChangeState(Enum _name)
+	public virtual void ChangeState(T _name)
 	{
 		if (HasState(_name) == false) { 
 			Debug.LogError($"{_name} 存在しないステートに切り替えることはできません");

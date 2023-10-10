@@ -68,7 +68,7 @@ public class Scene_Title : MonoBehaviour
 			case STEP_INIT: {
 				m_Timer = new Timer();
 
-				SetAlpha(m_CanvasGroup_TitleMovie, 0); 
+				SetAlpha(m_CanvasGroup_TitleMovie, 0);
 				SetAlpha(m_CanvasGroup_Title, 0);
 				SetVisible(m_PushCommamdUI, false);
 
@@ -97,7 +97,7 @@ public class Scene_Title : MonoBehaviour
 				float rate = m_Timer.progress;
 				SetAlpha(m_CanvasGroup_TitleMovie, m_AlphaCurve_TitleMovie.Evaluate(1 - rate));
 				if (end) {
-					m_Timer.Start(1);
+					m_Timer.Start(0.5f);
 					NextState();
 				}
 			} break;
@@ -107,24 +107,23 @@ public class Scene_Title : MonoBehaviour
 				float rate = m_Timer.progress;
 				SetAlpha(m_CanvasGroup_Title, rate);
 				if (end) {
-					m_AudioPkayBack_BGM = AudioManager.instance.PlayBGM(EBGM.Title2);
+					m_AudioPkayBack_BGM = AudioManager.PlayBGM(EBGM.Title2);
 					SetAlpha(m_CanvasGroup_Title, 1);
 					SetVisible(m_PushCommamdUI, true);
 					NextState();
 				}
 			} break;
-			// ▼ 開始コマンドを待つ
+			// ▼ ゲーム開始を待つ
 			case STEP_WAIT_COMMAMD: {
-				//もし、スペースキーが押されたらなら
 				if (InputManager.instance.IsGameStart()) {
 					AudioManager.instance.StopBGM(m_AudioPkayBack_BGM); //BGMを停止
 					AudioManager.instance.PlaySE(ESe.OpenLetter);		//SEを再生
 					m_Letteranim.SetBool("LetterBool", true);			//手紙を開く
 					m_Timer.Start(1.5f);								//シーンの遷移まで少し待つ
-					NextState();
+					NextState();										//次のステートへ
 				}
 			} break;
-			//次のシーンへ
+			// ▼ 次のシーンへ
 			case STEP_NEXT_SCENE: {
 				if (m_Timer.Update() == false) { break; }
 

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 /// <summary>
 /// アクションステートの基底
 /// </summary>
-public class ActionStateBase
+public class State_Base
 {
 	// -----------------------
 	// Member

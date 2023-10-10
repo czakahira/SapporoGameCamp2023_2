@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public class Character : MonoBehaviour
 {
+	// --------------------
+	// Member
+	// --------------------
+	#region open
 	[Tooltip("アニメーター")]
 	[SerializeField] protected Animator m_Animator;
 	[Tooltip("専用剛体")]
@@ -14,7 +18,7 @@ public class Character : MonoBehaviour
 	[Tooltip("コライダー")]
 	[SerializeField] protected CapsuleCollider2D m_Collider;
 	[Tooltip("ステート管理")]
-	[SerializeField] protected ActionController m_ActionController;
+	[SerializeField] protected StateController<ECharacterState> m_ActionController;
 	[Tooltip("スプライト")]
 	[SerializeField] protected SpriteRenderer m_SpriteRenderer;
 	[Tooltip("移動速度")]
@@ -22,14 +26,23 @@ public class Character : MonoBehaviour
 
 	[Header("DEBUG")]
 	[SerializeField] protected bool m_IsAutoAwake = false;
+	#endregion
 
-
+	// ---------------------
+	// Property
+	// ---------------------
+	#region open
 	public virtual CharacterLabel label => CharacterLabel.None;
 	/// <summary>
 	/// 今向いている方向
 	/// </summary>
 	public Vector3 currentDirection { get; protected set; }
+	#endregion
 
+	// --------------------
+	// Methos
+	// --------------------
+	#region open
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -46,4 +59,21 @@ public class Character : MonoBehaviour
 	public virtual void SelfUpdate() { }
 	public virtual void SeldDestory() { }
 
+	public virtual void ChangeState(ECharacterState _state)
+	{
+		m_ActionController?.ChangeState(_state);
+	}
+	#endregion
+}
+
+/// <summary>
+/// キャラクターのステート一覧
+/// </summary>
+public enum ECharacterState
+{
+	None = 0,
+
+	Idle,
+	//Walk,
+	Run,
 }

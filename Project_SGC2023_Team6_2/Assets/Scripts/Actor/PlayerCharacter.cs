@@ -4,16 +4,10 @@ using UnityEngine;
 using UnityEx;
 
 /// <summary>
-/// �v���C���[�L�����N�^�[�̏���
+/// プレイヤーキャラクター処理
 /// </summary>
 public class PlayerCharacter : Character
 {
-	public enum EState
-	{
-		Idle,
-		//Walk,
-		Run,
-	}
 
 	/// <summary>
 	/// 移動可能になるスティックの入力値
@@ -36,17 +30,17 @@ public class PlayerCharacter : Character
 		base.SelfAwake();
 
 		//アクション関係初期化
-		m_ActionController = new ActionController();
+		m_ActionController = new StateController<ECharacterState>();
 		m_ActionController.SelfAwake();
-		m_ActionController.AddState(EState.Idle, new ActionStateBase());
-		m_ActionController.AddState(EState.Run, new ActionStateBase());
+		m_ActionController.AddState(ECharacterState.Idle, new State_Base());
+		m_ActionController.AddState(ECharacterState.Run, new State_Base());
 
-		var state_Idle = m_ActionController.GetState(EState.Idle);
+		var state_Idle = m_ActionController.GetState(ECharacterState.Idle);
 		state_Idle.onUpdate += State_Idle;
-		var state_Run = m_ActionController.GetState(EState.Run);
+		var state_Run = m_ActionController.GetState(ECharacterState.Run);
 		state_Run.onUpdate += State_Run;
 
-		m_ActionController.ChangeState(EState.Idle);
+		m_ActionController.ChangeState(ECharacterState.Idle);
 
 	}
 	public override void SelfUpdate()
@@ -58,7 +52,7 @@ public class PlayerCharacter : Character
 		m_ActionController.SelfUpdate();
 
 		//アニメーターのパラメータを更新する
-		m_Animator.SetBool(ANIM_PARAM_HASH_RUN, (EState)m_ActionController.currentStateName == EState.Run);
+		m_Animator.SetBool(ANIM_PARAM_HASH_RUN, m_ActionController.currentStateName == ECharacterState.Run);
 	}
 	public override void SeldDestory()
 	{
@@ -71,7 +65,7 @@ public class PlayerCharacter : Character
 	protected void State_Idle()
 	{
 		if ( CanMove() ) {
-			m_ActionController.ChangeState(EState.Run);
+			m_ActionController.ChangeState(ECharacterState.Run);
 		}
 	}
 	/// <summary>
@@ -81,7 +75,7 @@ public class PlayerCharacter : Character
 	{	
 		if ( CanMove() == false ) {
 			m_Rb.velocity = Vector2.zero; //慣性を抜く
-			m_ActionController.ChangeState(EState.Idle);
+			m_ActionController.ChangeState(ECharacterState.Idle);
 		} else {
 			m_Rb.velocity = m_Stick.normalized * (m_MoveSpeed);
 			currentDirection = m_Stick.normalized;

@@ -29,7 +29,7 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 	/// <summary>
 	/// BGMの再生者
 	/// </summary>
-	protected List<AudioPlayer_BGM> m_BgmPlayers;
+	[SerializeField] protected List<AudioPlayer_BGM> m_BgmPlayers;
 	/// <summary>
 	/// BGM再生者の数
 	/// </summary>
@@ -47,7 +47,7 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 	/// <summary>
 	/// SE再生者
 	/// </summary>
-	protected List<AudioPlayer_SE> m_SePlayers;
+	[SerializeField] protected List<AudioPlayer_SE> m_SePlayers;
 	/// <summary>
 	/// SE再生者の数
 	/// </summary>
@@ -66,7 +66,7 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 		T audio = new T();
 		var source = AudioSource.Instantiate(m_AudioSourceOrigin);
 		if (_parent != null) { source.transform.SetParent(_parent); }
-		audio.Initialize(source);
+		(audio as T).Initialize(source);
 
 		return audio;
 	}
@@ -130,11 +130,11 @@ public class AudioPlayer_Base
 	/// <summary>
 	/// 再生中
 	/// </summary>
-	public bool isPlaying { get; protected set; } = false;
+	[field: SerializeField] public bool isPlaying { get; protected set; } = false;
 	/// <summary>
 	/// 使用中
 	/// </summary>
-	public bool isUsing { get; protected set; }
+	[field: SerializeField] public bool isUsing { get; protected set; } = false;
 	/// <summary>
 	/// 音量
 	/// </summary>
@@ -175,7 +175,6 @@ public class AudioPlayer_Base
 	public virtual void SelfUpdate() { }
 	public virtual void SelfDestroy() 
 	{
-
 		if (m_Source != null) {
 			AudioSource.Destroy(m_Source);
 			m_Source = null;
@@ -185,10 +184,12 @@ public class AudioPlayer_Base
 	public virtual void Play()
 	{
 		m_Source.Play();
+		isPlaying = true;
 	}
 	public virtual void Stop()
 	{
-		m_Source.Stop();
+		m_Source?.Stop();
+		isPlaying = false;
 	}
 
 	/// <summary>

@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (m_DestFrame <= m_frame)
 		{//ˆê’èŽžŠÔŒo‰ß‚µ‚½‚ç
+			if (m_enemyPrefab == null) { return; }
 
 			//’·‚³
 			float fLengthDest = fLength * nNumTreasure / nNumSaveTreasure + ((nNumSaveTreasure - nNumTreasure) * 0.5f);

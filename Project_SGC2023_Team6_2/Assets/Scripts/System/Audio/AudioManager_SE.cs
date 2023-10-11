@@ -37,7 +37,7 @@ public partial class AudioManager
 		}
 		m_SePlayers.Clear();
 		m_SePlayers = null;
-		m_SePlayerCount--;
+		m_SePlayerCount = 0;
 	}
 
 	/// <summary>
@@ -78,7 +78,8 @@ public partial class AudioManager
 	{
 		AudioPlayer_SE player = null;
 		foreach (var ply in m_SePlayers) {
-			if (ply.isUsing == false) {
+			if (ply.isUsing == false &&
+				ply.isPlaying == false) {
 				player = ply;
 				break;
 			}
@@ -116,7 +117,6 @@ public class AudioPlayer_SE : AudioPlayer_Base
 	{
 		base.Stop();
 
-		isPlaying = false;
 		isUsing = false;
 	}
 
@@ -126,7 +126,7 @@ public class AudioPlayer_SE : AudioPlayer_Base
 
 		if (isPlaying) {
 			float ratio = (m_Source.time / m_Source.clip.length);
-			if (ratio > 1) {
+			if (ratio >= 1) {
 				Stop();
 			}
 		}

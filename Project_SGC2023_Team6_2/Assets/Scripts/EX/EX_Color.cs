@@ -57,9 +57,9 @@ namespace UnityEx
 		/// </summary>
 		/// <param name="_h"></param>
 		/// <returns></returns>
-		public static Color HSVToRGB( float _h )
+		public static Color HSVToRGB( float _h, float _s, float _v )
 		{
-			return Color.HSVToRGB(_h, 100/100, 100/100);
+			return Color.HSVToRGB(_h/360, _s/100, _v/100);
 		}
 
 		public static string ColorFormat(this string self, string _colorCode)

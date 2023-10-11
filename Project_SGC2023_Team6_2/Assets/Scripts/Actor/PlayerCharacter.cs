@@ -48,6 +48,8 @@ public class PlayerCharacter : Character
 	}
 	public override void SelfUpdate()
 	{
+		base .SelfUpdate();
+
 		//スティックの入力値を更新
 		m_Stick = InputManager.instance.GetMove();
 
@@ -61,6 +63,8 @@ public class PlayerCharacter : Character
 	}
 	public override void SeldDestory()
 	{
+		base.SeldDestory();
+
 		m_ActionController.SelfDestory();
 	}
 

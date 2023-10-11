@@ -36,7 +36,7 @@ public partial class AudioManager
 		}
 		m_BgmPlayers.Clear();
 		m_BgmPlayers = null;
-		m_BgmPlayerCount--;
+		m_BgmPlayerCount = 0;
 	}
 
 	/// <summary>
@@ -130,7 +130,6 @@ public class AudioPlayer_BGM : AudioPlayer_Base
 	{
 		base.Stop();
 
-		isPlaying = false;
 		isUsing = false;
 	}
 

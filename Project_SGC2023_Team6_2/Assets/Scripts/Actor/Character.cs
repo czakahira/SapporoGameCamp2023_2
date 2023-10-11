@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 using EState =CharacterLibrary.EState;
 
 /// <summary>
@@ -23,10 +23,12 @@ public class Character : MonoBehaviour
 	[SerializeField] protected StateController<EState> m_ActionController;
 	[Tooltip("キャラスプライト")]
 	[SerializeField] protected SpriteRenderer m_CharacterRenderer;
-	[Tooltip("移動速度")]
-	[SerializeField] protected float m_MoveSpeed = 10;
 	[Tooltip("専用のタイム")]
 	[SerializeField] protected EachTime m_SelfTime;
+	[Tooltip("被ダメージ時のカラーチェンジシステム")]
+	[SerializeField] protected DamegeColorSystem m_DamegeColorSystem;
+	[Tooltip("移動速度")]
+	[SerializeField] protected float m_MoveSpeed = 10;
 
 	[Header("DEBUG")]
 	[SerializeField] protected bool m_IsAutoAwake = false;
@@ -59,9 +61,25 @@ public class Character : MonoBehaviour
 		SelfUpdate();
 	}
 
-	public virtual void SelfAwake() { }
-	public virtual void SelfUpdate() { }
-	public virtual void SeldDestory() { }
+	public virtual void SelfAwake()
+	{
+		m_SelfTime = TimeManager.rootTime.CreateChild();
+
+		m_DamegeColorSystem = new DamegeColorSystem(m_CharacterRenderer, m_SelfTime, 0.15f);
+	}
+	public virtual void SelfUpdate()
+	{
+		if (Keyboard.current.numpadPlusKey.wasPressedThisFrame) {
+			m_DamegeColorSystem.Start();
+		}
+
+		m_DamegeColorSystem.Update();
+	}
+	public virtual void SeldDestory()
+	{
+		m_SelfTime.Destroy();
+		m_SelfTime = null;
+	}
 
 	/// <summary>
 	/// ステート切り替え

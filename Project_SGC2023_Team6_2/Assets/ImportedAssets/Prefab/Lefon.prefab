@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1210508068647814896}
   - component: {fileID: 8297120745513149823}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 2955057109931777628}
   - component: {fileID: 8239900195758675825}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Lefon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_SpriteRenderer: {fileID: 2833972884044927394}
   m_MoveSpeed: 2
   m_IsAutoAwake: 1
+  m_Threshold_Run: 0.3
   m_Arrow: {fileID: 1861180601856765025}
 --- !u!1 &5933632144574249602
 GameObject:

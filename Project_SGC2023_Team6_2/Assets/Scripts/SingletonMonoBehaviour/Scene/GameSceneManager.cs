@@ -35,9 +35,6 @@ public class GameSceneManager : SystemSingleton<GameSceneManager>
 	protected override void Initialize()
 	{
 		base.Initialize();
-
-		//破棄不可オブジェクト
-		DontDestroyOnLoad(this.gameObject);
 	}
 
 	/// <summary>
@@ -78,8 +75,6 @@ public class GameSceneManager : SystemSingleton<GameSceneManager>
 	/// <summary>
 	/// 次のシーンへ
 	/// </summary>
-	/// <param name="_scene"></param>
-	/// <param name="_onLoaded"></param>
 	public async void NextScene(EScene _scene, UnityAction _onLoaded = null)
 	{
 		isLoading = true;

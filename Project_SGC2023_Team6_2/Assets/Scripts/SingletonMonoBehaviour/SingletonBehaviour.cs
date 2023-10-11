@@ -12,6 +12,10 @@ using UnityEx;
 /// <typeparam name="T"> 継承先のクラスタイプ </typeparam>
 public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
+	/// <summary>
+	/// 常駐オブジェクト化フラグ
+	/// </summary>
+	protected static bool s_IsDontDestroyOnloaded = false;
 	/// <summary> 
 	/// インスタンス(静的メンバー)
 	/// </summary>
@@ -28,9 +32,13 @@ public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehavi
 					GameObject obj = GameObject.Find(name);
 					if (obj == null) {
 						obj = new GameObject(name);
-						DontDestroyOnLoad(obj);
 					}
 					s_Instance = obj.AddComponent<T>();
+				}
+				//常駐オブジェクトとする
+				if (s_IsDontDestroyOnloaded == false) {
+					DontDestroyOnLoad(s_Instance);
+					s_IsDontDestroyOnloaded = true;
 				}
 				//初期化
 				(s_Instance as SingletonBehaviour<T>)?.Initialize();
@@ -54,30 +62,32 @@ public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehavi
 		if (s_Instance != null) {
 			s_Instance = null;
 		}
-	}
 
+		s_IsDontDestroyOnloaded = false;
+	}
 	/// <summary>
 	/// インスタンス作成時に１度呼ぶ初期化処理
 	/// </summary>
 	protected virtual void Initialize()
 	{
 #if UNITY_DEBUG
-		Debug.Log($"<color={Color.green.ToCode()}>Awakened</color> : {typeof(T).Name}");
+		Debug.Log($"<color={ColorEX.green_spring.ToCode()}> Awakened </color>: {typeof(T).Name}");
 #endif
 	}
 	/// <summary>
 	/// インスタンス破棄時に１度だけ呼ぶ処理
 	/// </summary>
 	protected virtual void SelfDestroy() { }
-
 	public void Destroy()
 	{
 		SelfDestroy();
 
+#if UNITY_DEBUG
+		Debug.Log($"<color={ColorEX.blue.ToCode()}> Destroied </color>: {typeof(T).Name}");
+#endif
 		//インスタンスを破棄
 		ClearInstance();
-#if UNITY_DEBUG
-		Debug.Log($"<color={ColorEX.blue_aqua.ToCode()}>Destroied</color> : {typeof(T).Name}");
-#endif
+		//破棄
+		Destroy(this);
 	}
 }

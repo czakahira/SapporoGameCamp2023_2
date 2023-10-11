@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEx;
 
 /// <summary>
 /// ゲームのマネージャー
@@ -17,7 +18,14 @@ public class GameMainManager : SingletonBehaviour<GameMainManager>
 	/// <summary>
 	/// 破棄イベント
 	/// </summary>
-	protected UnityAction m_Destoryer;
+	protected List<UnityAction> m_DestoryEvent;
+
+	protected override void Initialize()
+	{
+		base.Initialize();
+
+		m_DestoryEvent = new List<UnityAction>();
+	}
 
 	/// <summary>
 	/// １フレームにおいて最初に呼ばれる更新
@@ -28,7 +36,12 @@ public class GameMainManager : SingletonBehaviour<GameMainManager>
 		//フレームレートを更新します
 		fps = (1 / Time.deltaTime);
 
-
+		//ゲームを終了する
+		if (Boot.gameAwakened) {
+			if (InputManager.instance.IsQuitGame()) {
+				Quit();
+			}
+		}
 	}
 	/// <summary>
 	/// モノビヘイビアのデストロイはココだけ
@@ -36,10 +49,14 @@ public class GameMainManager : SingletonBehaviour<GameMainManager>
 	private void OnDestroy()
 	{
 		//登録されている全ての破棄イベントを呼び出す
-		m_Destoryer?.Invoke();
+		foreach (var destroy in m_DestoryEvent) { destroy?.Invoke(); }
+		m_DestoryEvent.Clear();
+		m_DestoryEvent = null;
 
 		//最後にこのインスタンスを削除する
 		Destroy();
+
+		Debug.Log($"<color={ColorEX.blue_aqua.ToCode()}> Successfully </color>: Game Shutdown");
 	}
 
 	/// <summary>
@@ -47,8 +64,19 @@ public class GameMainManager : SingletonBehaviour<GameMainManager>
 	/// </summary>
 	public void AddDestroy(UnityAction _destroy)
 	{
-		m_Destoryer += _destroy;
+		m_DestoryEvent.Insert(0, _destroy);
 	}
 
+	/// <summary>
+	/// ゲームを終了する
+	/// </summary>
+	public static void Quit()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
+		Application.Quit();
+#endif
+	}
 
 }

@@ -35,5 +35,11 @@ public class InputManager : SingletonBehaviour<InputManager>
 	{
 		return Keyboard.current.spaceKey.wasPressedThisFrame;
 	}
-
+	/// <summary>
+	/// ゲームを終了する
+	/// </summary>
+	public bool IsQuitGame()
+	{
+		return Keyboard.current.escapeKey.wasPressedThisFrame;
+	}
 }

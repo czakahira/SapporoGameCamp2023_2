@@ -97,7 +97,7 @@ public class Scene_Title : MonoBehaviour
 				float rate = m_Timer.progress;
 				SetAlpha(m_CanvasGroup_TitleMovie, m_AlphaCurve_TitleMovie.Evaluate(1 - rate));
 				if (end) {
-					m_Timer.Start(0.5f);
+					m_Timer.Start(1.5f);
 					NextState();
 				}
 			} break;

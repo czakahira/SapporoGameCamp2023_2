@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using EState =CharacterLibrary.EState;
+
 /// <summary>
 /// \キャラクター基底クラス
 /// </summary>
@@ -18,11 +20,13 @@ public class Character : MonoBehaviour
 	[Tooltip("コライダー")]
 	[SerializeField] protected CapsuleCollider2D m_Collider;
 	[Tooltip("ステート管理")]
-	[SerializeField] protected StateController<ECharacterState> m_ActionController;
-	[Tooltip("スプライト")]
-	[SerializeField] protected SpriteRenderer m_SpriteRenderer;
+	[SerializeField] protected StateController<EState> m_ActionController;
+	[Tooltip("キャラスプライト")]
+	[SerializeField] protected SpriteRenderer m_CharacterRenderer;
 	[Tooltip("移動速度")]
 	[SerializeField] protected float m_MoveSpeed = 10;
+	[Tooltip("専用のタイム")]
+	[SerializeField] protected EachTime m_SelfTime;
 
 	[Header("DEBUG")]
 	[SerializeField] protected bool m_IsAutoAwake = false;
@@ -59,21 +63,20 @@ public class Character : MonoBehaviour
 	public virtual void SelfUpdate() { }
 	public virtual void SeldDestory() { }
 
-	public virtual void ChangeState(ECharacterState _state)
+	/// <summary>
+	/// ステート切り替え
+	/// </summary>
+	public virtual void ChangeState(EState _state)
 	{
 		m_ActionController?.ChangeState(_state);
 	}
+
+	/// <summary>
+	/// キャラの向きを更新する
+	/// </summary>
+	protected virtual void UpdateFlip() { }
+
 	#endregion
 }
 
-/// <summary>
-/// キャラクターのステート一覧
-/// </summary>
-public enum ECharacterState
-{
-	None = 0,
 
-	Idle,
-	//Walk,
-	Run,
-}

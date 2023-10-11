@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Animator: {fileID: 2955057109931777628}
   m_Rb: {fileID: 6776386878824229301}
   m_Collider: {fileID: 2442191941391951486}
-  m_SpriteRenderer: {fileID: 2833972884044927394}
+  m_CharacterRenderer: {fileID: 2833972884044927394}
   m_MoveSpeed: 2
   m_IsAutoAwake: 1
   m_Threshold_Run: 0.3

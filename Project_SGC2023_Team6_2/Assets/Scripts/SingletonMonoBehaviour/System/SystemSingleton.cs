@@ -5,12 +5,12 @@ using UnityEx;
 
 /// <summary>
 /// システム関連用のマネージャー
+/// <para> ！）アップデーターが既に起動済みであることが前提です </para>
 /// <para> ！）生成時、アップデーターに更新処理を自動委託します </para>
 /// </summary>
-/// <typeparam name="T">  </typeparam>
 public abstract class SystemSingleton<T> : SingletonBehaviour<T> where T : MonoBehaviour
 {
-	protected override void Initialize() 
+	protected override void Initialize()
 	{
 		base.Initialize();
 		UpdateManager.instance.Add(SelfUpdate, SelfFixedUpdate, SelfLateUpdate);

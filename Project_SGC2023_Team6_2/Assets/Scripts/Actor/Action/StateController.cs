@@ -19,14 +19,18 @@ public class StateController<T>  where T : Enum
 	/// 登録済みステート数
 	/// </summary>
 	protected int m_StateCount;
-
+	/// <summary>
+	/// 前回のステート名
+	/// </summary>
 	public T previousStateName { get; protected set; }
-	public T currentStateName { get; protected set; }
-
 	/// <summary>
 	/// 前回実行していたにステート
 	/// </summary>
 	protected State_Base m_PreviousState;
+	/// <summary>
+	/// 現在のステート名
+	/// </summary>
+	public T currentStateName { get; protected set; }
 	/// <summary>
 	/// 現在実行中にステート
 	/// </summary>
@@ -58,10 +62,14 @@ public class StateController<T>  where T : Enum
 	/// </summary>
 	public virtual void SelfDestory()
 	{
+		m_CurrentState = null;
+		m_PreviousState = null;
+
 		foreach (var state in m_States.Values) {
 			state.SelfDestroy();
 		}
 		m_States.Clear();
+		m_States = null;
 		m_StateCount = 0;
 
 		m_CurrentState = null;
@@ -90,6 +98,8 @@ public class StateController<T>  where T : Enum
 		}
 		m_States.Add(_name, _state);
 		m_StateCount++;
+
+		_state.SelfAwake();
 	}
 	/// <summary>
 	/// ステートを破棄する

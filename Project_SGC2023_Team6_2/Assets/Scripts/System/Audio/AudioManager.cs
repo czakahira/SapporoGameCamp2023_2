@@ -11,6 +11,7 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 	// --------------------
 	// Member
 	// --------------------
+	#region open
 	/// <summary>
 	/// 始祖のソース
 	/// </summary>
@@ -51,6 +52,7 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 	/// SE再生者の数
 	/// </summary>
 	[SerializeField] protected int m_SePlayerCount;
+	#endregion
 
 
 	// --------------------
@@ -69,11 +71,12 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 		return audio;
 	}
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	protected override void Initialize()
 	{
 		base.Initialize();
-
-		DontDestroyOnLoad(gameObject);
 
 		Initialize_SE();
 		Initialize_BGM();
@@ -101,6 +104,10 @@ public partial class AudioManager : SystemSingleton<AudioManager>
 [Serializable]
 public class AudioPlayer_Base
 {
+	// --------------------
+	// Member
+	// --------------------
+	#region open
 	/// <summary>
 	/// 音源
 	/// </summary>
@@ -113,7 +120,12 @@ public class AudioPlayer_Base
 	/// 音量の倍率
 	/// </summary>
 	[SerializeField] protected float m_VolumeScale = 1;
+	#endregion
 
+	// --------------------
+	// Property
+	// --------------------
+	#region open
 	public virtual EAudioType type { get; protected set; } = EAudioType.None;
 	/// <summary>
 	/// 再生中
@@ -135,6 +147,9 @@ public class AudioPlayer_Base
 			UpdateVolume();
 		}
 	}
+	/// <summary>
+	/// 音量の倍率
+	/// </summary>
 	public float volumeScale 
 	{
 		get { return m_VolumeScale; }
@@ -144,6 +159,7 @@ public class AudioPlayer_Base
 			UpdateVolume();
 		}
 	}
+	#endregion
 
 	public AudioPlayer_Base()
 	{
@@ -156,7 +172,6 @@ public class AudioPlayer_Base
 		isPlaying = false;
 		isUsing = false;
 	}
-
 	public virtual void SelfUpdate() { }
 	public virtual void SelfDestroy() 
 	{
@@ -176,6 +191,9 @@ public class AudioPlayer_Base
 		m_Source.Stop();
 	}
 
+	/// <summary>
+	/// 音源の音量を更新する
+	/// </summary>
 	protected void UpdateVolume() { m_Source.volume = m_Volume * m_VolumeScale; }
 
 }

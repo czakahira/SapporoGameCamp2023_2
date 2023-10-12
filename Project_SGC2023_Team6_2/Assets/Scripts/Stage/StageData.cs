@@ -1,24 +1,24 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒXƒe[ƒWƒf[ƒ^
+/// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿
 /// </summary>
 [Serializable]
 public class StageData
 {
 	/// <summary>
-	/// ƒXƒe[ƒW‚ÌID
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ID
 	/// </summary>
 	public int id = 0;
 	/// <summary>
-	/// ƒQ[ƒ€‚ÌŠúŠÔ
+	/// ã‚²ãƒ¼ãƒ ã®æœŸé–“
 	/// </summary>
 	public float timer = 60;
 	/// <summary>
-	/// ƒvƒŒƒCƒ„[‚ÌƒXƒ|[ƒ“ˆÊ’u
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒãƒ¼ãƒ³ä½ç½®
 	/// </summary>
 	public Vector3 position_PlayerSpawn = Vector3.zero;
 

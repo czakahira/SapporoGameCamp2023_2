@@ -1,32 +1,32 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// ƒvƒŒƒCƒ„[‚ª”­Ë‚·‚é’e‚ğ§Œä‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒç™ºå°„ã™ã‚‹å¼¾ã‚’åˆ¶å¾¡ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 public class ccshot : MonoBehaviour
 {
-    private Vector3 m_velocity; // ‘¬“x
+    private Vector3 m_velocity; // é€Ÿåº¦
 
-    // –ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚³‚ê‚éŠÖ”
+    // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°
     private void Update()
     {
-        // ˆÚ“®‚·‚é
+        // ç§»å‹•ã™ã‚‹
         transform.localPosition += m_velocity;
     }
 
-    // ’e‚ğ”­Ë‚·‚é‚É‰Šú‰»‚·‚é‚½‚ß‚ÌŠÖ”
+    // å¼¾ã‚’ç™ºå°„ã™ã‚‹æ™‚ã«åˆæœŸåŒ–ã™ã‚‹ãŸã‚ã®é–¢æ•°
     public void Init(float angle, float speed)
     {
-        // ’e‚Ì”­ËŠp“x‚ğƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚é
+        // å¼¾ã®ç™ºå°„è§’åº¦ã‚’ãƒ™ã‚¯ãƒˆãƒ«ã«å¤‰æ›ã™ã‚‹
         var direction = Utils.GetDirection(angle);
 
-        // ”­ËŠp“x‚Æ‘¬‚³‚©‚ç‘¬“x‚ğ‹‚ß‚é
+        // ç™ºå°„è§’åº¦ã¨é€Ÿã•ã‹ã‚‰é€Ÿåº¦ã‚’æ±‚ã‚ã‚‹
         m_velocity = direction * speed;
 
-        // ’e‚ªis•ûŒü‚ğŒü‚­‚æ‚¤‚É‚·‚é
+        // å¼¾ãŒé€²è¡Œæ–¹å‘ã‚’å‘ãã‚ˆã†ã«ã™ã‚‹
         var angles = transform.localEulerAngles;
         angles.z = angle - 90;
         transform.localEulerAngles = angles;
 
-        // 2 •bŒã‚Éíœ‚·‚é
+        // 2 ç§’å¾Œã«å‰Šé™¤ã™ã‚‹
         Destroy(gameObject, 2);
     }
 }

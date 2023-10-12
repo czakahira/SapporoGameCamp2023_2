@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class Utils : MonoBehaviour
         
     }
 
-    // w’è‚³‚ê‚½Šp“xi 0 ` 360 j‚ğƒxƒNƒgƒ‹‚É•ÏŠ·‚µ‚Ä•Ô‚·
+    // æŒ‡å®šã•ã‚ŒãŸè§’åº¦ï¼ˆ 0 ï½ 360 ï¼‰ã‚’ãƒ™ã‚¯ãƒˆãƒ«ã«å¤‰æ›ã—ã¦è¿”ã™
     public static Vector3 GetDirection(float angle)
     {
         return new Vector3

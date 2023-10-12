@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ”Ä—pƒXƒe[ƒg‚ÌƒRƒ“ƒgƒ[ƒ‰[
+/// æ±ç”¨ã‚¹ãƒ†ãƒ¼ãƒˆã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 /// </summary>
 public class StateController<T>  where T : Enum
 {
@@ -12,27 +12,27 @@ public class StateController<T>  where T : Enum
 	// Member
 	// -----------------------
 	/// <summary>
-	/// “o˜^Ï‚İ‚ÌƒXƒe[ƒg
+	/// ç™»éŒ²æ¸ˆã¿ã®ã‚¹ãƒ†ãƒ¼ãƒˆ
 	/// </summary>
 	protected Dictionary<T, State_Base> m_States;
 	/// <summary>
-	/// “o˜^Ï‚İƒXƒe[ƒg”
+	/// ç™»éŒ²æ¸ˆã¿ã‚¹ãƒ†ãƒ¼ãƒˆæ•°
 	/// </summary>
 	protected int m_StateCount;
 	/// <summary>
-	/// ‘O‰ñ‚ÌƒXƒe[ƒg–¼
+	/// å‰å›ã®ã‚¹ãƒ†ãƒ¼ãƒˆå
 	/// </summary>
 	public T previousStateName { get; protected set; }
 	/// <summary>
-	/// ‘O‰ñÀs‚µ‚Ä‚¢‚½‚ÉƒXƒe[ƒg
+	/// å‰å›å®Ÿè¡Œã—ã¦ã„ãŸã«ã‚¹ãƒ†ãƒ¼ãƒˆ
 	/// </summary>
 	protected State_Base m_PreviousState;
 	/// <summary>
-	/// Œ»İ‚ÌƒXƒe[ƒg–¼
+	/// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ãƒˆå
 	/// </summary>
 	public T currentStateName { get; protected set; }
 	/// <summary>
-	/// Œ»İÀs’†‚ÉƒXƒe[ƒg
+	/// ç¾åœ¨å®Ÿè¡Œä¸­ã«ã‚¹ãƒ†ãƒ¼ãƒˆ
 	/// </summary>
 	protected State_Base m_CurrentState;
 
@@ -40,7 +40,7 @@ public class StateController<T>  where T : Enum
 	// Method
 	// -----------------------
 	/// <summary>
-	///	©‘O‚ÅŒÄ‚Ô‰Šú‰»
+	///	è‡ªå‰ã§å‘¼ã¶åˆæœŸåŒ–
 	/// </summary>
 	public virtual void SelfAwake()
 	{
@@ -51,14 +51,14 @@ public class StateController<T>  where T : Enum
 		m_CurrentState = null;
 	}
 	/// <summary>
-	///	©‘O‚ÅŒÄ‚ÔXV
+	///	è‡ªå‰ã§å‘¼ã¶æ›´æ–°
 	/// </summary>
 	public virtual void SelfUpdate()
 	{
 		m_CurrentState.OnUpdate();
 	}
 	/// <summary>
-	///	©‘O‚ÅŒÄ‚Ô”jŠü
+	///	è‡ªå‰ã§å‘¼ã¶ç ´æ£„
 	/// </summary>
 	public virtual void SelfDestory()
 	{
@@ -76,11 +76,11 @@ public class StateController<T>  where T : Enum
 	}
 
 	/// <summary>
-	/// w’èƒX[ƒg‚ğŠ‚µ‚Ä‚¢‚é‚©
+	/// æŒ‡å®šã‚¹ãƒ¼ãƒˆã‚’æ‰€æŒã—ã¦ã„ã‚‹ã‹
 	/// </summary>
 	public bool HasState(T _name) { return m_States.ContainsKey(_name); }
 	/// <summary>
-	/// w’èƒXƒe[ƒg‚ğæ“¾‚·‚é
+	/// æŒ‡å®šã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
 	/// </summary>
 	public virtual State_Base GetState(T _name)
 	{
@@ -88,12 +88,12 @@ public class StateController<T>  where T : Enum
 		return null;
 	}
 	/// <summary>
-	/// ƒXƒe[ƒg‚ğ’Ç‰Á‚·‚é
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¿½åŠ ã™ã‚‹
 	/// </summary>
 	public virtual void AddState(T _name, State_Base _state)
 	{
 		if (HasState(_name)) {
-			Debug.LogError($"{_name} ‚Í“o˜^Ï‚İ‚Å‚·B");
+			Debug.LogError($"{_name} ã¯ç™»éŒ²æ¸ˆã¿ã§ã™ã€‚");
 			return;
 		}
 		m_States.Add(_name, _state);
@@ -102,24 +102,24 @@ public class StateController<T>  where T : Enum
 		_state.SelfAwake();
 	}
 	/// <summary>
-	/// ƒXƒe[ƒg‚ğ”jŠü‚·‚é
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ç ´æ£„ã™ã‚‹
 	/// </summary>
 	public virtual void RemoveState(T _name, State_Base _state)
 	{
 		if (HasState(_name) == false) {
-			Debug.LogError($"{_name} ‚Í–¢“o˜^‚Å‚·B");
+			Debug.LogError($"{_name} ã¯æœªç™»éŒ²ã§ã™ã€‚");
 			return;
 		}
 		m_States.Remove(_name);
 		m_StateCount--;
 	}
 	/// <summary>
-	/// w’èƒXƒe[ƒg‚ÉØ‚è‘Ö‚¦‚é
+	/// æŒ‡å®šã‚¹ãƒ†ãƒ¼ãƒˆã«åˆ‡ã‚Šæ›¿ãˆã‚‹
 	/// </summary>
 	public virtual void ChangeState(T _name)
 	{
 		if (HasState(_name) == false) { 
-			Debug.LogError($"{_name} ‘¶İ‚µ‚È‚¢ƒXƒe[ƒg‚ÉØ‚è‘Ö‚¦‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ");
+			Debug.LogError($"{_name} å­˜åœ¨ã—ãªã„ã‚¹ãƒ†ãƒ¼ãƒˆã«åˆ‡ã‚Šæ›¿ãˆã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“");
 			return;
 		}
 
@@ -128,10 +128,10 @@ public class StateController<T>  where T : Enum
 		currentStateName = _name;
 		m_CurrentState = GetState(_name);
 
-		m_PreviousState?.OnExit(); //‘O‚ÌƒXƒe[ƒg‚©‚ç”²‚¯‚é
-		m_CurrentState?.OnEnter(); //Ÿ‚ÌƒXƒe[ƒg‚É“ü‚é
+		m_PreviousState?.OnExit(); //å‰ã®ã‚¹ãƒ†ãƒ¼ãƒˆã‹ã‚‰æŠœã‘ã‚‹
+		m_CurrentState?.OnEnter(); //æ¬¡ã®ã‚¹ãƒ†ãƒ¼ãƒˆã«å…¥ã‚‹
 
-		Debug.Log($"ƒXƒe[ƒg•ÏX: {previousStateName} -> {currentStateName}");
+		Debug.Log($"ã‚¹ãƒ†ãƒ¼ãƒˆå¤‰æ›´: {previousStateName} -> {currentStateName}");
 	}
 
 }

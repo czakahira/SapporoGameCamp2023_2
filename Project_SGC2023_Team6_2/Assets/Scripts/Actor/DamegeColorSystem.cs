@@ -1,18 +1,30 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEx;
 
 /// <summary>
-/// �_���[�W���󂯂����̉��o�V�X�e��
+/// ダメージを受けた時の演出システム
 /// </summary>
 [Serializable]
 public class DamegeColorSystem
 {
+	/// <summary>
+	/// ステート
+	/// </summary>
 	[SerializeField] protected int m_State = 0;
+	/// <summary>
+	/// 色を変化させるスプライト
+	/// </summary>
 	[SerializeField] protected SpriteRenderer m_Sprite;
+	/// <summary>
+	/// 期間計測に使用するタイマー
+	/// </summary>
 	[SerializeField] protected Timer m_Timer;
+	/// <summary>
+	/// 色の変化期間
+	/// </summary>
 	[SerializeField] protected float m_Duration;
 
 	public DamegeColorSystem(SpriteRenderer _sprite, EachTime _parentTime, float _duration = 1)

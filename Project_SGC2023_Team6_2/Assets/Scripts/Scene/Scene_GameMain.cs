@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒCƒ“ƒQ[ƒ€‚Ìˆ—
+/// ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ã®å‡¦ç†
 /// </summary>
 public class Scene_GameMain : MonoBehaviour
 {
@@ -19,27 +19,27 @@ public class Scene_GameMain : MonoBehaviour
 		Clear,
 	}
 	/// <summary>
-	/// ƒCƒ“ƒQ[ƒ€‚Ìó‹µ
+	/// ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ã®çŠ¶æ³
 	/// </summary>
 	protected EState m_State = EState.None;
 	/// <summary>
-	/// ƒCƒ“ƒQ[ƒ€‚ÌƒXƒe[ƒgŠÇ—
+	/// ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ã®ã‚¹ãƒ†ãƒ¼ãƒˆç®¡ç†
 	/// </summary>
 	protected StateController<EState> m_States;
 	/// <summary>
-	/// ƒCƒ“ƒQ[ƒ€—pƒ^ƒCƒ€
+	/// ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ç”¨ã‚¿ã‚¤ãƒ 
 	/// </summary>
 	protected EachTime m_GameTime;
 	/// <summary>
-	/// §ŒÀŠÔ‚Ìƒ^ƒCƒ}[
+	/// åˆ¶é™æ™‚é–“ã®ã‚¿ã‚¤ãƒãƒ¼
 	/// </summary>
 	protected Timer m_StageTimer;
 	/// <summary>
-	/// ƒXƒe[ƒW‚ÌƒtƒF[ƒYƒ^ƒCƒ}[
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒ•ã‚§ãƒ¼ã‚ºã‚¿ã‚¤ãƒãƒ¼
 	/// </summary>
 	protected Timer m_PhaseTimer;
 	/// <summary>
-	/// ƒvƒŒƒCƒ„[
+	/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	/// </summary>
 	protected PlayerCharacter m_Player;
 
@@ -74,29 +74,29 @@ public class Scene_GameMain : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ƒ`ƒFƒbƒNFƒNƒŠƒA
+	/// ãƒã‚§ãƒƒã‚¯ï¼šã‚¯ãƒªã‚¢
 	/// </summary>
 	protected bool Check_Clear()
 	{
 		return false;
 	}
 	/// <summary>
-	/// ƒ`ƒFƒbƒNF§ŒÀŠÔ
+	/// ãƒã‚§ãƒƒã‚¯ï¼šåˆ¶é™æ™‚é–“
 	/// </summary>
 	protected bool Check_Timeout()
 	{
 		return m_StageTimer.Update();
 	}
 	/// <summary>
-	/// ƒQ[ƒ€‚ÌI—¹ƒ`ƒFƒbƒN
+	/// ã‚²ãƒ¼ãƒ ã®çµ‚äº†ãƒã‚§ãƒƒã‚¯
 	/// </summary>
 	protected bool Check_Gameover()
 	{
-		//ƒNƒŠƒA
+		//ã‚¯ãƒªã‚¢
 		if (Check_Clear()) {
 			return true;
 		}
-		//ŠÔØ‚ê
+		//æ™‚é–“åˆ‡ã‚Œ
 		else if (Check_Timeout()) {
 		
 			return true;
@@ -105,7 +105,7 @@ public class Scene_GameMain : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ƒQ[ƒ€‚Ì€”õ
+	/// ã‚²ãƒ¼ãƒ ã®æº–å‚™
 	/// </summary>
 	protected void Setup()
 	{

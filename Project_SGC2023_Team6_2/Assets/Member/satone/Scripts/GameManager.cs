@@ -1,6 +1,6 @@
-//======================================================
+ï»¿//======================================================
 //
-// ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[ˆ— [GameManager.cs]
+// ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼å‡¦ç† [GameManager.cs]
 // Author : shion satone
 //
 //======================================================
@@ -10,58 +10,58 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	//ƒ}ƒbƒvƒf[ƒ^
+	//ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	[SerializeField]
 	private MapData m_mapData;
 
-	//ƒ}ƒbƒv–¼
+	//ãƒãƒƒãƒ—å
 	[SerializeField]
 	private string m_mapName;
 
 	[SerializeField]
-	[Header("ƒvƒŒƒCƒ„[‚ÌˆÊ’u")] Vector3 posCenter;   //ƒvƒŒƒCƒ„[‚ÌˆÊ’u
+	[Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®")] Vector3 posCenter;   //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®
 
 	[SerializeField]
-	[Header("ˆê‚Â‚Ì‰~‚Ì”¼Œa(X, Y)")] Vector2 fRadius;  //ˆê‚Â‚Ì‰~‚Ì”¼Œa
+	[Header("ä¸€ã¤ã®å††ã®åŠå¾„(X, Y)")] Vector2 fRadius;  //ä¸€ã¤ã®å††ã®åŠå¾„
 
 	[SerializeField]
-	[Header("ƒvƒŒƒCƒ„[‚©‚ç“G‚Ì‰~‚Ì‹——£")] float fLength;  //ƒvƒŒƒCƒ„[‚©‚ç“G‚Ì‰~‚Ì‹——£
+	[Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰æ•µã®å††ã®è·é›¢")] float fLength;  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰æ•µã®å††ã®è·é›¢
 
 	[SerializeField]
-	[Header("“G‚ªˆê“x‚Éˆê‚Â‚Ì‰~‚É‘‚¦‚é”")] int nNumGenerate;   //“G‚ª‘‚¦‚é”
+	[Header("æ•µãŒä¸€åº¦ã«ä¸€ã¤ã®å††ã«å¢—ãˆã‚‹æ•°")] int nNumGenerate;   //æ•µãŒå¢—ãˆã‚‹æ•°
 
 	[SerializeField]
-	[Header("“G‚ÌƒvƒŒƒnƒu")] GameObject m_enemyPrefab;      //“G‚ÌƒvƒŒƒnƒu
+	[Header("æ•µã®ãƒ—ãƒ¬ãƒãƒ–")] GameObject m_enemyPrefab;      //æ•µã®ãƒ—ãƒ¬ãƒãƒ–
 
 	[SerializeField]
-	[Header("“GƒXƒ|[ƒ“ŠÔ(•b)")] private int m_DestFrame;     //–Ú•W‚ÌƒtƒŒ[ƒ€ƒJƒEƒ“ƒg
+	[Header("æ•µã‚¹ãƒãƒ¼ãƒ³æ™‚é–“(ç§’)")] private int m_DestFrame;     //ç›®æ¨™ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
 
-	//Œ»İ‚ÌƒtƒŒ[ƒ€ƒJƒEƒ“ƒg
+	//ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
 	private float m_frame = 0;
 
-	//•ó” ‚Ìî•ñ
+	//å®ç®±ã®æƒ…å ±
 	private TreasureData[] m_treasureData;
 
-	int nNumTreasure = 0;         //•ó•¨”
-	int nNumSaveTreasure = 0;     //•ó•¨”•Û‘¶—p
+	int nNumTreasure = 0;         //å®ç‰©æ•°
+	int nNumSaveTreasure = 0;     //å®ç‰©æ•°ä¿å­˜ç”¨
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		m_treasureData = m_mapData.m_treasures;     //•ó” ‚Ìî•ñ‘ã“ü
+		m_treasureData = m_mapData.m_treasures;     //å®ç®±ã®æƒ…å ±ä»£å…¥
 
 		//======================================================
-		//•ó” ‚Ì¶¬
+		//å®ç®±ã®ç”Ÿæˆ
 		//======================================================
 		for (int nCnt = 0; nCnt < m_mapData.m_treasures.Length; nCnt++)
 		{
-			//•ó” ‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
+			//å®ç®±ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
 			GameObject obj = Instantiate(m_treasureData[nCnt].m_prefab, m_treasureData[nCnt].m_position, Quaternion.identity) as GameObject;
 
-			nNumTreasure++;     //•ó•¨”‰ÁZ
+			nNumTreasure++;     //å®ç‰©æ•°åŠ ç®—
 		}
 
-		nNumSaveTreasure = nNumTreasure;        //‘”•Û‘¶
+		nNumSaveTreasure = nNumTreasure;        //ç·æ•°ä¿å­˜
 	}
 
 	// Update is called once per frame
@@ -70,60 +70,60 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F8) &&
 			nNumTreasure > 0)
 		{
-			nNumTreasure--;     //•ó•¨Á‚·
+			nNumTreasure--;     //å®ç‰©æ¶ˆã™
 		}
 
-		//“G‚Ì¶¬
+		//æ•µã®ç”Ÿæˆ
 		EnemyGenerate();
 
 	}
 
 	//======================================================
-	//“G‚Ì¶¬ˆ—
+	//æ•µã®ç”Ÿæˆå‡¦ç†
 	//======================================================
 	private void EnemyGenerate()
 	{
 		if (m_DestFrame <= m_frame)
-		{//ˆê’èŠÔŒo‰ß‚µ‚½‚ç
+		{//ä¸€å®šæ™‚é–“çµŒéã—ãŸã‚‰
 			if (m_enemyPrefab == null) { return; }
 
-			//’·‚³
+			//é•·ã•
 			float fLengthDest = fLength * nNumTreasure / nNumSaveTreasure + ((nNumSaveTreasure - nNumTreasure) * 0.5f);
 
-			//“G‚Ì”
+			//æ•µã®æ•°
 			int nNum = nNumGenerate + (nNumSaveTreasure - nNumTreasure);
 
 			Debug.Log(fLengthDest);
 
-			Vector3 randPos;        //ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u
+			Vector3 randPos;        //ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®
 
 			for (int nCntEnemy = 0; nCntEnemy < nNum; nCntEnemy++)
 			{
-				//‰~‚Ì”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‘ã“ü(‰E)
+				//å††ã®ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ä»£å…¥(å³)
 				randPos.x = fRadius.x * Random.insideUnitCircle.x + posCenter.x + fLengthDest;
 				randPos.y = fRadius.y * Random.insideUnitCircle.y + posCenter.y;
 				randPos.z = posCenter.z;
 
-				//“G‚Ì¶¬
+				//æ•µã®ç”Ÿæˆ
 				Instantiate(m_enemyPrefab, randPos, Quaternion.identity);
 
-				//‰~‚Ì”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‘ã“ü(¶)
+				//å††ã®ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ä»£å…¥(å·¦)
 				randPos.x = fRadius.x * Random.insideUnitCircle.x + posCenter.x - fLengthDest;
 				randPos.y = fRadius.y * Random.insideUnitCircle.y + posCenter.y;
 				randPos.z = posCenter.z;
 
-				//“G‚Ì¶¬
+				//æ•µã®ç”Ÿæˆ
 				Instantiate(m_enemyPrefab, randPos, Quaternion.identity);
 
-				//‰~‚Ì”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‘ã“ü(ã)
+				//å††ã®ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ä»£å…¥(ä¸Š)
 				randPos.x = fRadius.x * Random.insideUnitCircle.x + posCenter.x;
 				randPos.y = fRadius.y * Random.insideUnitCircle.y + posCenter.y + fLengthDest;
 				randPos.z = posCenter.z;
 
-				//“G‚Ì¶¬
+				//æ•µã®ç”Ÿæˆ
 				Instantiate(m_enemyPrefab, randPos, Quaternion.identity);
 
-				//‰~‚Ì”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‘ã“ü(‰º)
+				//å††ã®ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ä»£å…¥(ä¸‹)
 				randPos.x = fRadius.x * Random.insideUnitCircle.x + posCenter.x;
 				randPos.y = fRadius.y * Random.insideUnitCircle.y + posCenter.y - fLengthDest;
 				randPos.z = posCenter.z;
@@ -131,36 +131,36 @@ public class GameManager : MonoBehaviour
 				//Debug.Log(fInsideRadius.x + fRadius.x);
 				//Debug.Log("X:" + randPos.x + " Y:" + randPos.y);
 
-				//“G‚Ì¶¬
+				//æ•µã®ç”Ÿæˆ
 				Instantiate(m_enemyPrefab, randPos, Quaternion.identity);
 			}
 
-			m_frame = 0;        //ƒtƒŒ[ƒ€”ƒŠƒZƒbƒg
+			m_frame = 0;        //ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ãƒªã‚»ãƒƒãƒˆ
 		}
 		else
-		{//ŠÔŒo‰ß‚µ‚Ä‚È‚©‚Á‚½‚ç
+		{//æ™‚é–“çµŒéã—ã¦ãªã‹ã£ãŸã‚‰
 
 			m_frame += Time.deltaTime;
 		}
 	}
 
 	///======================================================
-	///‰~üã‚Ìƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‚ğ‹‚ß‚éˆ—
+	///å††å‘¨ä¸Šã®ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ã‚’æ±‚ã‚ã‚‹å‡¦ç†
 	///======================================================
 	private Vector3 CircleHorizon(float radius)
 	{
-		var angle = Random.Range(0, 360);       //ƒ‰ƒ“ƒ_ƒ€‚ÈŠp“x
-		var rad = angle * Mathf.Deg2Rad;        //Šp“x‚Ì•ÏŠ·
+		var angle = Random.Range(0, 360);       //ãƒ©ãƒ³ãƒ€ãƒ ãªè§’åº¦
+		var rad = angle * Mathf.Deg2Rad;        //è§’åº¦ã®å¤‰æ›
 
-		//”ÍˆÍ“à‚ÌÀ•W‹‚ß‚é
+		//ç¯„å›²å†…ã®åº§æ¨™æ±‚ã‚ã‚‹
 		var px = Mathf.Cos(rad) * radius;
 		var py = Mathf.Sin(rad) * radius;
 
-		return new Vector3(px, py, 0);      //”ÍˆÍ“à‚Ìƒ‰ƒ“ƒ_ƒ€‚È’l‚ğ•Ô‚·
+		return new Vector3(px, py, 0);      //ç¯„å›²å†…ã®ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’è¿”ã™
 	}
 
 	//======================================================
-	//ƒ}ƒbƒvƒf[ƒ^‚ÌƒvƒƒpƒeƒB
+	//ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 	//======================================================
 	public MapData mapData
 	{
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	//======================================================
-	//ƒ}ƒbƒv–¼‚ÌƒvƒƒpƒeƒB
+	//ãƒãƒƒãƒ—åã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 	//======================================================
 	public string mapName
 	{

@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using EState =CharacterLibrary.EState;
 
 /// <summary>
-/// \ƒLƒƒƒ‰ƒNƒ^[Šî’êƒNƒ‰ƒX
+/// \ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼åŸºåº•ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class Character : MonoBehaviour
 {
@@ -13,21 +13,21 @@ public class Character : MonoBehaviour
 	// Member
 	// --------------------
 	#region open
-	[Tooltip("ƒAƒjƒ[ƒ^[")]
+	[Tooltip("ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼")]
 	[SerializeField] protected Animator m_Animator;
-	[Tooltip("ê—p„‘Ì")]
+	[Tooltip("å°‚ç”¨å‰›ä½“")]
 	[SerializeField] protected Rigidbody2D m_Rb;
-	[Tooltip("ƒRƒ‰ƒCƒ_[")]
+	[Tooltip("ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼")]
 	[SerializeField] protected CapsuleCollider2D m_Collider;
-	[Tooltip("ƒXƒe[ƒgŠÇ—")]
+	[Tooltip("ã‚¹ãƒ†ãƒ¼ãƒˆç®¡ç†")]
 	[SerializeField] protected StateController<EState> m_ActionController;
-	[Tooltip("ƒLƒƒƒ‰ƒXƒvƒ‰ƒCƒg")]
+	[Tooltip("ã‚­ãƒ£ãƒ©ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ")]
 	[SerializeField] protected SpriteRenderer m_CharacterRenderer;
-	[Tooltip("ê—p‚Ìƒ^ƒCƒ€")]
+	[Tooltip("å°‚ç”¨ã®ã‚¿ã‚¤ãƒ ")]
 	[SerializeField] protected EachTime m_SelfTime;
-	[Tooltip("”íƒ_ƒ[ƒW‚ÌƒJƒ‰[ƒ`ƒFƒ“ƒWƒVƒXƒeƒ€")]
+	[Tooltip("è¢«ãƒ€ãƒ¡ãƒ¼ã‚¸æ™‚ã®ã‚«ãƒ©ãƒ¼ãƒã‚§ãƒ³ã‚¸ã‚·ã‚¹ãƒ†ãƒ ")]
 	[SerializeField] protected DamegeColorSystem m_DamegeColorSystem;
-	[Tooltip("ˆÚ“®‘¬“x")]
+	[Tooltip("ç§»å‹•é€Ÿåº¦")]
 	[SerializeField] protected float m_MoveSpeed = 10;
 
 	[Header("DEBUG")]
@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
 	#region open
 	public virtual CharacterLabel label => CharacterLabel.None;
 	/// <summary>
-	/// ¡Œü‚¢‚Ä‚¢‚é•ûŒü
+	/// ä»Šå‘ã„ã¦ã„ã‚‹æ–¹å‘
 	/// </summary>
 	public Vector3 currentDirection { get; protected set; }
 	#endregion
@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ƒXƒe[ƒgØ‚è‘Ö‚¦
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆåˆ‡ã‚Šæ›¿ãˆ
 	/// </summary>
 	public virtual void ChangeState(EState _state)
 	{
@@ -90,7 +90,7 @@ public class Character : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ƒLƒƒƒ‰‚ÌŒü‚«‚ğXV‚·‚é
+	/// ã‚­ãƒ£ãƒ©ã®å‘ãã‚’æ›´æ–°ã™ã‚‹
 	/// </summary>
 	protected virtual void UpdateFlip() { }
 

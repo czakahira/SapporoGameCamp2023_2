@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ƒAƒNƒVƒ‡ƒ“ƒXƒe[ƒg‚ÌŠî’ê
+/// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®åŸºåº•
 /// </summary>
 public class State_Base
 {
@@ -23,21 +23,21 @@ public class State_Base
 	public virtual void SelfDestroy(){ }
 
 	/// <summary>
-	/// ƒXƒe[ƒg‚ÌŠJn
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã®é–‹å§‹
 	/// </summary>
 	public virtual void OnEnter()
 	{
 		onEnter?.Invoke();
 	}
 	/// <summary>
-	/// ƒXƒe[ƒg‚ÌXV
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã®æ›´æ–°
 	/// </summary>
 	public virtual void OnUpdate()
 	{
 		onUpdate?.Invoke();
 	}
 	/// <summary>
-	/// ƒXƒe[ƒg‚Ì”jŠü
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã®ç ´æ£„
 	/// </summary>
 	public virtual void OnExit()
 	{

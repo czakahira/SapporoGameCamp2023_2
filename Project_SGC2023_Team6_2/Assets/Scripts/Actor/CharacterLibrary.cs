@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterLibrary
 {
 	/// <summary>
-	/// ƒLƒƒƒ‰ƒNƒ^[‚ÌƒXƒe[ƒgˆê——
+	/// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ãƒˆä¸€è¦§
 	/// </summary>
 	public enum EState
 	{
 		None = 0,
 
-		SpawnWait, //oŒ»‚µ‚Ä‘Ò‹@
+		SpawnWait, //å‡ºç¾ã—ã¦å¾…æ©Ÿ
 
-		Idle,		//‘f—§‚¿
+		Idle,		//ç´ ç«‹ã¡
 		//Walk,
-		Run,		//‘–‚è
+		Run,		//èµ°ã‚Š
 	}
 }

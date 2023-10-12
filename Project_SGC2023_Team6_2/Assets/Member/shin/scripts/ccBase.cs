@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ccBase : MonoBehaviour
 { 
 
-    public ccshot m_shotPrefab; // ’e‚ÌƒvƒŒƒnƒu
-    public float m_shotSpeed; // ’e‚ÌˆÚ“®‚Ì‘¬‚³
-    public float m_shotAngleRange; // •¡”‚Ì’e‚ğ”­Ë‚·‚é‚ÌŠp“x
-    public float m_shotTimer; // ’e‚Ì”­Ëƒ^ƒCƒ~ƒ“ƒO‚ğŠÇ—‚·‚éƒ^ƒCƒ}[
-    public int m_shotCount; // ’e‚Ì”­Ë”
-    public float m_shotInterval; // ’e‚Ì”­ËŠÔŠui•bj
+    public ccshot m_shotPrefab; // å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–
+    public float m_shotSpeed; // å¼¾ã®ç§»å‹•ã®é€Ÿã•
+    public float m_shotAngleRange; // è¤‡æ•°ã®å¼¾ã‚’ç™ºå°„ã™ã‚‹æ™‚ã®è§’åº¦
+    public float m_shotTimer; // å¼¾ã®ç™ºå°„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ç®¡ç†ã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼
+    public int m_shotCount; // å¼¾ã®ç™ºå°„æ•°
+    public float m_shotInterval; // å¼¾ã®ç™ºå°„é–“éš”ï¼ˆç§’ï¼‰
 
 
     // Start is called before the first frame update
@@ -23,23 +23,23 @@ public class ccBase : MonoBehaviour
     void Update()
     {
 
-        var angle = 0; //ƒvƒŒƒCƒ„[‚ÌŒü‚«A‚¾‚Æv‚í‚ê‚é
+        var angle = 0; //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ãã€ã ã¨æ€ã‚ã‚Œã‚‹
 
-        // ’e‚Ì”­Ëƒ^ƒCƒ~ƒ“ƒO‚ğŠÇ—‚·‚éƒ^ƒCƒ}[‚ğXV‚·‚é
+        // å¼¾ã®ç™ºå°„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ç®¡ç†ã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼ã‚’æ›´æ–°ã™ã‚‹
         m_shotTimer += Time.deltaTime;
 
         
 
-        // ‚Ü‚¾’e‚Ì”­Ëƒ^ƒCƒ~ƒ“ƒO‚Å‚Í‚È‚¢ê‡‚ÍA‚±‚±‚Åˆ—‚ğI‚¦‚é
+        // ã¾ã å¼¾ã®ç™ºå°„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã¯ãªã„å ´åˆã¯ã€ã“ã“ã§å‡¦ç†ã‚’çµ‚ãˆã‚‹
         if (m_shotTimer < m_shotInterval) return;
 
-        // ’e‚Ì”­Ëƒ^ƒCƒ~ƒ“ƒO‚ğŠÇ—‚·‚éƒ^ƒCƒ}[‚ğƒŠƒZƒbƒg‚·‚é
+        // å¼¾ã®ç™ºå°„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ç®¡ç†ã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
         //m_shotTimer = 0;
 
-        // ©“®‚Å’e‚ğ”­Ë‚·‚é
+        // è‡ªå‹•ã§å¼¾ã‚’ç™ºå°„ã™ã‚‹
         //ShootNWay(angle, m_shotAngleRange, m_shotSpeed, m_shotCount);
 
-        //ƒL[“ü—Í‚Å”­Ë‚·‚éê‡
+        //ã‚­ãƒ¼å…¥åŠ›ã§ç™ºå°„ã™ã‚‹å ´åˆ
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.C))
         {
             ShootNWay(angle, m_shotAngleRange, m_shotSpeed, m_shotCount);
@@ -48,37 +48,37 @@ public class ccBase : MonoBehaviour
 
         }
 
-    // ’e‚ğ”­Ë‚·‚éŠÖ”
+    // å¼¾ã‚’ç™ºå°„ã™ã‚‹é–¢æ•°
     private void ShootNWay(
         float angleBase, float angleRange, float speed, int count)
     {
-        var pos = transform.localPosition; // ƒvƒŒƒCƒ„[‚ÌˆÊ’u
-        var rot = transform.localRotation; // ƒvƒŒƒCƒ„[‚ÌŒü‚«
+        var pos = transform.localPosition; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®
+        var rot = transform.localRotation; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ã
 
-        // ’e‚ğ•¡””­Ë‚·‚éê‡
+        // å¼¾ã‚’è¤‡æ•°ç™ºå°„ã™ã‚‹å ´åˆ
         if (1 < count)
         {
-            // ”­Ë‚·‚é‰ñ”•ªƒ‹[ƒv‚·‚é
+            // ç™ºå°„ã™ã‚‹å›æ•°åˆ†ãƒ«ãƒ¼ãƒ—ã™ã‚‹
             for (int i = 0; i < count; ++i)
             {
-                // ’e‚Ì”­ËŠp“x‚ğŒvZ‚·‚é
+                // å¼¾ã®ç™ºå°„è§’åº¦ã‚’è¨ˆç®—ã™ã‚‹
                 var angle = angleBase +
                     angleRange * ((float)i / (count - 1) - 0.5f);
 
-                // ”­Ë‚·‚é’e‚ğ¶¬‚·‚é
+                // ç™ºå°„ã™ã‚‹å¼¾ã‚’ç”Ÿæˆã™ã‚‹
                 var shot = Instantiate(m_shotPrefab, pos, rot);
 
-                // ’e‚ğ”­Ë‚·‚é•ûŒü‚Æ‘¬‚³‚ğİ’è‚·‚é
+                // å¼¾ã‚’ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿã•ã‚’è¨­å®šã™ã‚‹
                 shot.Init(angle, speed);
             }
         }
-        // ’e‚ğ 1 ‚Â‚¾‚¯”­Ë‚·‚éê‡
+        // å¼¾ã‚’ 1 ã¤ã ã‘ç™ºå°„ã™ã‚‹å ´åˆ
         else if (count == 1)
         {
-            // ”­Ë‚·‚é’e‚ğ¶¬‚·‚é
+            // ç™ºå°„ã™ã‚‹å¼¾ã‚’ç”Ÿæˆã™ã‚‹
             var shot = Instantiate(m_shotPrefab, pos, rot);
 
-            // ’e‚ğ”­Ë‚·‚é•ûŒü‚Æ‘¬‚³‚ğİ’è‚·‚é
+            // å¼¾ã‚’ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿã•ã‚’è¨­å®šã™ã‚‹
             shot.Init(angleBase, speed);
         }
     }

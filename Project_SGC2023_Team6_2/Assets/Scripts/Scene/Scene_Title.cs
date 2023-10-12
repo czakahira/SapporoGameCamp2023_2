@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹ƒV[ƒ“ˆ——p
+/// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³å‡¦ç†ç”¨
 /// </summary>
 public class Scene_Title : MonoBehaviour
 {
@@ -18,39 +18,39 @@ public class Scene_Title : MonoBehaviour
 	protected const int STEP_NEXT_SCENE = 6;
 
 	/// <summary>
-	/// ƒXƒe[ƒg”Ô†
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆç•ªå·
 	/// </summary>
 	protected int m_SubState = 0;
 	/// <summary>
-	/// Animator‚ğanim‚Æ‚¢‚¤•Ï”‚Å’è‹`‚·‚é
+	/// Animatorã‚’animã¨ã„ã†å¤‰æ•°ã§å®šç¾©ã™ã‚‹
 	/// </summary>
 	[SerializeField] protected Animator m_Letteranim;
 	/// <summary>
-	/// ƒ^ƒCƒgƒ‹“®‰æ—p
+	/// ã‚¿ã‚¤ãƒˆãƒ«å‹•ç”»ç”¨
 	/// </summary>
 	[SerializeField] protected VideoPlayer m_VideoPlayer;
 	/// <summary>
-	/// ƒ^ƒCƒ}[
+	/// ã‚¿ã‚¤ãƒãƒ¼
 	/// </summary>
 	protected Timer m_Timer;
 	/// <summary>
-	/// BGM‚ÌƒvƒŒƒCƒoƒbƒN
+	/// BGMã®ãƒ—ãƒ¬ã‚¤ãƒãƒƒã‚¯
 	/// </summary>
 	protected AudioPlayer_BGM m_AudioPkayBack_BGM;
 	/// <summary>
-	/// ƒ^ƒCƒgƒ‹“®‰æƒOƒ‹[ƒv
+	/// ã‚¿ã‚¤ãƒˆãƒ«å‹•ç”»ã‚°ãƒ«ãƒ¼ãƒ—
 	/// </summary>
 	[SerializeField] protected CanvasGroup m_CanvasGroup_TitleMovie;
 	/// <summary>
-	/// ƒ^ƒCƒgƒ‹“®‰æ‚Ì“§–¾“xƒJ[ƒu
+	/// ã‚¿ã‚¤ãƒˆãƒ«å‹•ç”»ã®é€æ˜åº¦ã‚«ãƒ¼ãƒ–
 	/// </summary>
 	[SerializeField] protected AnimationCurve m_AlphaCurve_TitleMovie;
 	/// <summary>
-	/// ƒ^ƒCƒgƒ‹UI‚ÌƒOƒ‹[ƒv
+	/// ã‚¿ã‚¤ãƒˆãƒ«UIã®ã‚°ãƒ«ãƒ¼ãƒ—
 	/// </summary>
 	[SerializeField] protected CanvasGroup m_CanvasGroup_Title;
 	/// <summary>
-	/// ƒQ[ƒ€‹N“®UI
+	/// ã‚²ãƒ¼ãƒ èµ·å‹•UI
 	/// </summary>
 	[SerializeField] protected Image m_PushCommamdUI;
 
@@ -64,7 +64,7 @@ public class Scene_Title : MonoBehaviour
 	void Update()
 	{
 		switch (m_SubState) {
-			// ¥ ‰Šú‰»
+			// â–¼ åˆæœŸåŒ–
 			case STEP_INIT: {
 				m_Timer = new Timer();
 
@@ -75,7 +75,7 @@ public class Scene_Title : MonoBehaviour
 				m_Timer.Start(1);
 				NextState();
 			} break;
-			// ¥ ƒ^ƒCƒgƒ‹ƒ€[ƒr[‚Ì€”õ
+			// â–¼ ã‚¿ã‚¤ãƒˆãƒ«ãƒ ãƒ¼ãƒ“ãƒ¼ã®æº–å‚™
 			case STEP_READY_MOVIE: {
 				if (m_Timer.Update() == false) { break; }
 
@@ -83,15 +83,15 @@ public class Scene_Title : MonoBehaviour
 				m_VideoPlayer.Play();
 				NextState();
 			} break;
-			// ¥ ƒ^ƒCƒgƒ‹ƒ€[ƒr[‚ğÄ¶‚·‚é
+			// â–¼ ã‚¿ã‚¤ãƒˆãƒ«ãƒ ãƒ¼ãƒ“ãƒ¼ã‚’å†ç”Ÿã™ã‚‹
 			case STEP_PLAY_MOVIE: {
 				var rate = (m_VideoPlayer.time / m_VideoPlayer.clip.length);
-				if (rate >= 0.8f) { //Ä¶Š®—¹‚µ‚½‚çŸ‚Ö
+				if (rate >= 0.8f) { //å†ç”Ÿå®Œäº†ã—ãŸã‚‰æ¬¡ã¸
 					m_Timer.Start(0.5f);
 					NextState();
 				}
 			} break;
-			// ¥ ƒ^ƒCƒgƒ‹ƒ€[ƒr[‚Ì‘Şº
+			// â–¼ ã‚¿ã‚¤ãƒˆãƒ«ãƒ ãƒ¼ãƒ“ãƒ¼ã®é€€å®¤
 			case STEP_EXIT_MOVIE: {
 				bool end = m_Timer.Update();
 				float rate = m_Timer.progress;
@@ -101,7 +101,7 @@ public class Scene_Title : MonoBehaviour
 					NextState();
 				}
 			} break;
-			// ¥ ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì•\¦
+			// â–¼ ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã®è¡¨ç¤º
 			case STEP_OPEN_TITLE: {
 				bool end = m_Timer.Update();
 				float rate = m_Timer.progress;
@@ -113,17 +113,17 @@ public class Scene_Title : MonoBehaviour
 					NextState();
 				}
 			} break;
-			// ¥ ƒQ[ƒ€ŠJn‚ğ‘Ò‚Â
+			// â–¼ ã‚²ãƒ¼ãƒ é–‹å§‹ã‚’å¾…ã¤
 			case STEP_WAIT_COMMAMD: {
 				if (InputManager.instance.IsGameStart()) {
-					AudioManager.instance.StopBGM(m_AudioPkayBack_BGM); //BGM‚ğ’â~
-					AudioManager.instance.PlaySE(ESe.OpenLetter);		//SE‚ğÄ¶
-					m_Letteranim.SetBool("LetterBool", true);			//è†‚ğŠJ‚­
-					m_Timer.Start(1.5f);								//ƒV[ƒ“‚Ì‘JˆÚ‚Ü‚Å­‚µ‘Ò‚Â
-					NextState();										//Ÿ‚ÌƒXƒe[ƒg‚Ö
+					AudioManager.instance.StopBGM(m_AudioPkayBack_BGM); //BGMã‚’åœæ­¢
+					AudioManager.instance.PlaySE(ESe.OpenLetter);		//SEã‚’å†ç”Ÿ
+					m_Letteranim.SetBool("LetterBool", true);			//æ‰‹ç´™ã‚’é–‹ã
+					m_Timer.Start(1.5f);								//ã‚·ãƒ¼ãƒ³ã®é·ç§»ã¾ã§å°‘ã—å¾…ã¤
+					NextState();										//æ¬¡ã®ã‚¹ãƒ†ãƒ¼ãƒˆã¸
 				}
 			} break;
-			// ¥ Ÿ‚ÌƒV[ƒ“‚Ö
+			// â–¼ æ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸
 			case STEP_NEXT_SCENE: {
 				if (m_Timer.Update() == false) { break; }
 
@@ -134,15 +134,15 @@ public class Scene_Title : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Ÿ‚ÌƒXƒe[ƒg‚Ö
+	/// æ¬¡ã®ã‚¹ãƒ†ãƒ¼ãƒˆã¸
 	/// </summary>
 	protected void NextState() { m_SubState++; }
 	/// <summary>
-	/// ƒXƒe[ƒgI—¹
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆçµ‚äº†
 	/// </summary>
 	protected void EndState() { m_SubState = -1; }
 	/// <summary>
-	/// w’èƒLƒƒƒ“ƒoƒX‚Ì“§–¾“x‚ğİ’è‚·‚é
+	/// æŒ‡å®šã‚­ãƒ£ãƒ³ãƒã‚¹ã®é€æ˜åº¦ã‚’è¨­å®šã™ã‚‹
 	/// </summary>
 	protected void SetAlpha(CanvasGroup _cg, float _alpha) { _cg.alpha = _alpha; }
 

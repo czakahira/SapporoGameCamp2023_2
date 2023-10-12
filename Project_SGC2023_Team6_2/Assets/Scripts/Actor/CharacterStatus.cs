@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒLƒƒƒ‰ƒNƒ^[ƒXƒe[ƒ^ƒX
+/// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 /// </summary>
 public class CharacterStatus : IStatus
 {
 	/// <summary>
-	/// ‘Ì—Í
+	/// ä½“åŠ›
 	/// </summary>
 	[SerializeField] protected float m_HealthPoint;
 	/// <summary>
-	/// UŒ‚—Í
+	/// æ”»æ’ƒåŠ›
 	/// </summary>
 	[SerializeField] protected float m_AttackPower;
 
